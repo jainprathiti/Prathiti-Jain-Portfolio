@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prathiti Jain Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff7f4;
+      --bg-soft: #fff1f6;
+      --card: #ffffff;
+      --card-soft: #f7e9ee;
+      --border: #f0d9e2;
+      --text: #4a2432;
+      --text-soft: #6a3a4d;
+      --muted: #a0647c;
+      --accent: #c75b7a;
+      --accent-dark: #a13e5a;
+      --shadow: 0 8px 24px rgba(145, 74, 103, 0.06);
+      --radius-xl: 2rem;
+      --radius-lg: 1.5rem;
+      --radius-md: 1.25rem;
+      --max-width: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    img { max-width: 100%; display: block; }
+    button, a { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    .site-shell {
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .page-shell {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    .serif {
+      font-family: "Cormorant Garamond", Georgia, serif;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 247, 244, 0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 0;
+    }
+
+    .site-title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-btn,
+    .pill-btn,
+    .inside-btn,
+    .work-tab {
+      border: none;
+      cursor: pointer;
+      transition: 0.25s ease;
+      border-radius: 999px;
+    }
+
+    .nav-btn {
+      background: var(--card-soft);
+      color: #7a3e55;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+    }
+
+    .nav-btn.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .nav-btn:hover,
+    .inside-btn:hover,
+    .work-tab:hover,
+    .pill-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .page {
+      display: none;
+      animation: fadeUp 0.28s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .banner {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 32px;
+      background: linear-gradient(135deg, #fff7f4 0%, #fde7ef 55%, #f8d4e3 100%);
+      overflow: hidden;
+    }
+
+    .banner-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .typing-word {
+      display: inline-flex;
+      min-width: 18ch;
+      align-items: center;
+      white-space: nowrap;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cursor {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--accent);
+      animation: blink 0.9s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .skills-box {
+      width: 100%;
+      padding: 20px;
+      border-radius: 1.75rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .skills-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 16px;
+    }
+
+    .skill-pill {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--accent);
+      color: white;
+      padding: 0 48px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .home-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .card-pad { padding: 24px; }
+
+    .section-title {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      color: #5a2a3a;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .sub-title {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2rem;
+      color: var(--text);
+    }
+
+    .body-copy,
+    .body-copy p {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      line-height: 1.95;
+    }
+
+    .body-copy p { margin: 0; }
+    .body-copy p + p { margin-top: 16px; }
+
+    .inside-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .inside-btn {
+      background: var(--card-soft);
+      color: #7a3e55;
+      padding: 12px 16px;
+      text-align: center;
+    }
+
+    .work-tabs {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .work-tab {
+      background: var(--card-soft);
+      color: #7a3e55;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+    }
+
+    .work-tab.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .work-panel { display: none; margin-top: 32px; }
+    .work-panel.active { display: block; }
+
+    .story-stack { display: grid; gap: 24px; }
+
+    .media-box {
+      margin-top: 16px;
+      min-height: 300px;
+      border-radius: 1.25rem;
+      background: var(--card-soft);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .media-box video {
+    width: 100%;
+    border-radius: 1.25rem;
+    display: block;
+    }
+    .infographic-frame {
+      margin-top: 16px;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .story-link,
+    .inline-link {
+      color: var(--accent);
+      transition: color 0.25s ease;
+    }
+
+    .story-link:hover,
+    .inline-link:hover {
+      color: var(--accent-dark);
+    }
+
+    .bias-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .logo-box {
+    background: #f7e9ee;
+    border-radius: 2rem;
+    padding: 24px;
+    display: inline-flex; /* KEY CHANGE */
+    justify-content: center;
+    align-items: center;
+    }
+
+    .logo-box img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 1rem; /* optional but looks nicer */
+    }
+
+    .social-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: var(--card-soft);
+      color: #7a3e55;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+    }
+
+    .about-top {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .photo-wrap {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+
+    .about-cards {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .bullet-list {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .bullet-list li + li { margin-top: 8px; }
+
+    .personal-shell {
+      margin: 40px auto 0;
+      max-width: 900px;
+    }
+
+    .music-card,
+    .personal-subcard,
+    .photos-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg);
+    }
+
+    .music-card { padding: 16px; margin-top: 24px; }
+    .music-inner {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg);
+    }
+
+    .music-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .progress {
+      margin-top: 16px;
+      height: 8px;
+      width: 100%;
+      background: #f2d6df;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 33%;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .personal-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .personal-subcard,
+    .photos-card { padding: 16px; }
+
+    .quote-output {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      font-weight: 500;
+      color: var(--text-soft);
+      min-height: 34px;
+    }
+    .photos-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* EACH PHOTO BOX */
+.photo-slot {
+  position: relative;
+  height: 350px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+/* IMAGE */
+.photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* HOVER ZOOM */
+.photo-slot:hover img {
+  transform: scale(1.05);
+}
+
+/* OVERLAY */
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* SHOW OVERLAY */
+.photo-slot:hover .photo-overlay {
+  opacity: 1;
+}
+.contact-box {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center; /* keep centered horizontally */
+  background: var(--card-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+    .contact-box iframe {
+  width: 700px;   /* KEY: makes it skinnier */
+  max-width: 100%;
+  height: 650px;
+  border-radius: 1.25rem;
+  display: block;
+}
+    @media (max-width: 980px) {
+      .banner-grid,
+      .home-grid,
+      .bias-grid,
+      .about-top,
+      .about-cards,
+      .personal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-pill {
+        padding: 0 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-shell,
+      .container {
+        width: min(var(--max-width), calc(100% - 28px));
+      }
+
+      .banner,
+      .card-pad {
+        padding: 20px;
+      }
+
+      .hero-title {
+        font-size: 2.6rem;
+      }
+
+      .photos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container header-inner">
+        <p class="site-title">Prathiti Jain</p>
+        <nav class="nav">
+          <button class="nav-btn active" data-page="home">Home</button>
+          <button class="nav-btn" data-page="about">About</button>
+          <button class="nav-btn" data-page="work">Work</button>
+          <button class="nav-btn" data-page="contact">Contact</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page active" id="page-home">
+        <div class="page-shell">
+          <div class="banner">
+            <div class="banner-grid">
+              <div>
+                <p class="eyebrow">Prathiti Jain • Portfolio</p>
+                <h1 class="hero-title serif">She is a <span class="typing-word"><span id="hero-typing"></span><span class="cursor">|</span></span></h1>
+              </div>
+              <div class="skills-box">
+                <p class="eyebrow" style="margin-bottom:0;">Skills</p>
+                <div class="skills-grid">
+                  <span class="skill-pill">Strategy</span>
+                  <span class="skill-pill">Storytelling</span>
+                  <span class="skill-pill">Content</span>
+                  <span class="skill-pill">Marketing</span>
+                  <span class="skill-pill">Branding</span>
+                  <span class="skill-pill">Communication</span>
+                  <span class="skill-pill">Audience</span>
+                  <span class="skill-pill">Creativity</span>
+                  <span class="skill-pill">Adaptability</span>
+                  <span class="skill-pill">Research</span>
+                  <span class="skill-pill">Analytics</span>
+                  <span class="skill-pill">Collaboration</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-grid">
+            <div class="card card-pad">
+              <h2 class="sub-title serif">Professional Overview</h2>
+              <div class="body-copy" style="margin-top:16px;">
+                <p>I am a student at the University of North Carolina at Chapel Hill with a strong interest in the intersection of media and storytelling. Currently I'm pursuing a double major in Business Administration and Media &amp; Journalism with post graduation plans of entering the marketing field. I am especially interested in understanding how audiences engage with content and how brands connect with people through culture and communication.</p>
+                <p>Through my work and past internship experiences, I've learned how to focus on translating ideas into clear, engaging narratives. I aim to combine strategy with creativity through digital storytelling or creative projects. It is extremely important that my work is both meaningful and impactful to the audience I produce it to.</p>
+              </div>
+            </div>
+
+            <div class="card card-pad">
+              <h3 class="sub-title serif" style="font-size:1.9rem;">What's Inside</h3>
+              <div class="inside-stack">
+                <button class="inside-btn" data-page-jump="about">About Me</button>
+                <button class="inside-btn" data-page-jump="work">View Work</button>
+                <button class="inside-btn" data-page-jump="contact">Contact</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-about">
+        <div class="page-shell">
+          <div>
+            <p class="eyebrow">About</p>
+            <h1 class="section-title serif">Who is Prathiti Jain?</h1>
+          </div>
+
+          <div class="about-top">
+            <div class="card card-pad photo-wrap">
+              <img src="Prathiti_Jain_Headshot.JPG" alt="Prathiti Jain headshot" onerror="this.src='https://via.placeholder.com/600x800?text=Upload+Your+Photo'">
+            </div>
+
+            <div class="card card-pad">
+              <p class="eyebrow">Get to know me professionally</p>
+              <div class="body-copy" style="margin-top:16px;">
+                <p>I am a student at the University of North Carolina at Chapel Hill with a strong interest in the intersection of media and business. As a double major in Business Administration and Media &amp; Journalism, I am especially interested in the ways communication and strategy work together to shape how people connect with content, brands, and ideas.</p>
+                <p>Across both academic and professional experiences, I have focused on learning how to translate ideas into clear, compelling narratives. My past internship at Taurus Wellness (mental health start-up) helped me strengthen my skills in communication and digital storytelling. From finding research articles that resonated with the brand to adapting that content into stories Taurus' audience could understand, I learned how an audience moves, pays attention, and most importantly, what they engage with. This experience showed me the value of producing work that feels thoughtful, intentional, and audience-centered.</p>
+                <p>Looking ahead, I hope to build a career in corporate marketing where I can combine creativity with strategy to produce meaningful work. I am drawn to opportunities that allow me to grow my skillset while thinking both critically and creatively. Most importantly, I look forward to finding a place where I can help brands communicate in ways that feel authentic and memorable.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-cards">
+            <div class="card card-pad">
+              <p class="sub-title serif" style="font-size:1.6rem;">What I'm Doing Now</p>
+              <ul class="bullet-list">
+                <li>Double majoring in Business Administration and Media &amp; Journalism at UNC Chapel Hill</li>
+                <li>Active in Pi Sigma Epsilon, Women in Consulting at Carolina, Carolina Women in Business</li>
+              </ul>
+            </div>
+            <div class="card card-pad">
+              <p class="sub-title serif" style="font-size:1.6rem;">Past Experience</p>
+              <ul class="bullet-list">
+                <li>Marketing Specialist @ <a class="inline-link" href="https://www.tauruswellness.io" target="_blank" rel="noopener noreferrer">Taurus Wellness</a></li>
+                <li>Strategy &amp; Development Intern @ <a class="inline-link" href="https://www.b-sidearts.org" target="_blank" rel="noopener noreferrer">B-Side Arts</a></li>
+              </ul>
+            </div>
+            <div class="card card-pad">
+              <p class="sub-title serif" style="font-size:1.6rem;">Where I'm Headed</p>
+              <ul class="bullet-list">
+                <li>Corporate Marketing in Big Tech</li>
+                <li>Entertainment Marketing</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="personal-shell">
+            <div class="card card-pad">
+              <p class="eyebrow" style="text-align:center;">Get to know me personally</p>
+
+              <div class="music-card">
+                <p class="eyebrow" style="margin-bottom:0;">What I'm Listening To Right Now</p>
+                <div class="music-inner" style="margin-top:16px;">
+                    <iframe 
+                      style="border-radius:12px" 
+                      src="https://open.spotify.com/embed/track/4sebUbjqbcgDSwG6PbSGI0" 
+                      width="100%" 
+                      height="80" 
+                      frameborder="0" 
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy">
+                    </iframe>
+                  </div>
+
+              <div class="personal-grid">
+                <div class="personal-subcard">
+                  <p class="sub-title serif" style="font-size:1.6rem;">Favorite Quote</p>
+                  <div class="quote-output"><span id="quote-typing"></span><span class="cursor">|</span></div>
+                </div>
+                <div class="personal-subcard">
+                  <p class="sub-title serif" style="font-size:1.6rem;">Free Time</p>
+                  <p class="body-copy" style="margin-top:12px; font-size:0.92rem; line-height:1.8;">
+                    I enjoy spending time with my Shih Tzu (Piku), creating content (
+                    <button type="button" id="work-samples-link" class="inline-link" style="border:none; background:none; padding:0; cursor:pointer;">check out my work samples!</button>
+                    ), discovering new music, and trying new restaurants as a vegetarian.
+                  </p>
+                </div>
+              </div>
+
+              <div class="photos-card">
+                <p class="sub-title serif" style="font-size:1.7rem; text-align:center;">Favorite Photos</p>
+              
+                <div class="photos-grid">
+                  
+                    <div class="photo-slot">
+                        <img src="IMG_8106.jpeg" alt="My first K-pop Concert">
+                        <div class="photo-overlay">
+                          <p>My First K-pop concert!</p>
+                        </div>
+                      </div>
+                      
+                      <div class="photo-slot">
+                        <img src="FullSizeRender.jpeg" alt="Trying new vegetarian dishes">
+                        <div class="photo-overlay">
+                          <p>Trying Mapo Tofu in Japan!</p>
+                        </div>
+                      </div>
+                      
+                      <div class="photo-slot">
+                        <img src="IMG_8636.jpeg" alt="Spending time with sister and Piku">
+                        <div class="photo-overlay">
+                          <p>All the Jain siblings in one picture!</p>
+                        </div>
+                      </div>
+              
+                </div>
+              </div>
+            </div>
+          
+      </section>
+
+      <section class="page" id="page-work">
+        <div class="page-shell">
+          <h1 class="section-title serif">Work</h1>
+      
+          <div class="work-tabs">
+            <button class="work-tab active" data-work-tab="story">Digital Story</button>
+            <button class="work-tab" data-work-tab="bias">Bias Wrecked</button>
+          </div>
+      
+          <!-- DIGITAL STORY PANEL -->
+          <div class="work-panel active" id="work-story">
+            <div class="story-stack">
+              <div class="card card-pad">
+                <h2 class="sub-title serif" style="font-size:2.4rem;">Lexi Wilder Finds Herself</h2>
+              </div>
+      
+              <div class="card card-pad body-copy">
+                <p>For many people, coming out is a long and emotional process of self-discovery, fear, and eventual acceptance. For Lexi Wilder, a student at the University of North Carolina at Chapel Hill, that journey began much earlier than she expected. From the first feelings she didn't quite understand in elementary school to the internal conflict she experienced in middle school, Lexi's story reflects the complexity of growing up while questioning your identity.</p>
+      
+                <p>As Lexi grew up in a religious environment and became heavily involved in church extracurriculars, she struggled to reconcile her feelings with what she had been taught. She recalls nights filled with confusion and frustration, wondering why she couldn't feel the same way as everyone else. This internal battle shaped much of her early experience, making it difficult for her to fully accept who she was. These moments highlight the emotional weight that many LGBTQ+ individuals carry before they ever share their identity with others.</p>
+      
+                <p>When it came time to come out, Lexi's experiences with her parents were very different. Her father responded with immediate support, offering reassurance and acceptance. Her mother, however, initially reacted with confusion and pain, even expressing that she felt she had failed as a parent. This response had deeply impacted Lexi at the time, but it also marked the beginning of a gradual shift. Over time, her mother began to show small but meaningful signs of support, demonstrating that acceptance can evolve.</p>
+      
+                <p>Today, Lexi describes herself as happier and more comfortable than ever before. At Chapel Hill, she has found an environment where she can openly express who she is without fear. Her story is not just about coming out. It is about growth, resilience, and understanding that acceptance has to come from others and oneself. The most important piece she learned was that acceptance from both takes time. It serves as a reminder that while the journey may be difficult, it can lead to a place of confidence and authenticity.</p>
+              </div>
+      
+              <div class="card card-pad">
+                <p class="eyebrow">Video</p>
+                <p class="body-copy" style="margin-top:12px;">
+                  The video below brings Lexi's story to life through her own words, capturing the emotion and personal experiences behind her journey. Hearing directly from Lexi adds depth and authenticity that written text alone cannot fully convey.
+                </p>
+                <div class="media-box">
+                    <video controls>
+                      <source src="MEJO 121 final video.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+              </div>
+      
+              <div class="card card-pad">
+                <p class="eyebrow">Infographic</p>
+      
+                <p class="body-copy" style="margin-top:12px;">
+                  This infographic highlights what meaningful support looks like for LGBTQ+ individuals, specifically during the coming out process. Drawing from research by
+                  <a class="story-link" href="https://www.thetrevorproject.org/survey-2023/" target="_blank" rel="noopener noreferrer">
+                    The Trevor Project
+                  </a>,
+                  it emphasizes how responses from family and community members can directly impact mental health outcomes.
+                </p>
+      
+                <div style="margin-top:16px; display:flex; justify-content:center;">
+                  <iframe
+                    src="Jain_Infographic.pdf"
+                    width="80%"
+                    height="600px"
+                    style="border:none; border-radius:16px;"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="work-panel" id="work-bias">
+            <div class="card card-pad">
+              <div class="bias-grid">
+                <div class="logo-box"><img src="bias wrecked logo.jpeg" alt="Bias Wrecked logo"></div>
+                <div>
+                  <h2 class="sub-title serif" style="font-size:2rem;">Bias Wrecked</h2>
+                  <p class="body-copy" style="margin-top:16px;"> <a class="story-link" href="https://biaswrecked.com" target="_blank" rel="noopener noreferrer">Bias Wrecked</a> is a K-pop podcast and content platform where I break down the stories, strategies, and cultural moments behind some of the biggest groups in the industry. I started this project out of a genuine curiosity for how K-pop groups are built and marketed differently from Western artists, and it quickly grew into a space where I could combine storytelling with audience-focused content. Through episodes, short-form videos, and digital content, I focus on making complex industry insights accessible and engaging. This project reflects my ability to connect cultural trends with strategic thinking while building a brand that resonates with a global audience.</p>
+      
+                  <div class="social-row">
+                    <a class="pill-btn" href="https://open.spotify.com/show/3Di7ZZiHvP9WNjR7y9ZyTf?si=43fb0ef4ec6541b1" target="_blank" rel="noopener noreferrer">Spotify</a>
+                    <a class="pill-btn" href="https://www.instagram.com/biaswrecked.pod?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a class="pill-btn" href="https://www.tiktok.com/@biaswrecked.pod?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">TikTok</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </section>
+
+      <section class="page" id="page-contact">
+        <div class="contact-box">
+            <iframe 
+              src="https://unc.az1.qualtrics.com/jfe/form/SV_cZSIcGRg6rYOSyO "
+              width="100%" 
+              height="700px"
+              frameborder="0"
+              style="border-radius: 1.25rem;">
+            </iframe>
+          </div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const jumpButtons = document.querySelectorAll('[data-page-jump]');
+    const workTabs = document.querySelectorAll('.work-tab');
+    const workPanels = document.querySelectorAll('.work-panel');
+    const workSamplesLink = document.getElementById('work-samples-link');
+
+    let activePage = 'home';
+    let activeWorkTab = 'story';
+
+    function showPage(pageId) {
+      activePage = pageId;
+      pages.forEach((page) => {
+        page.classList.toggle('active', page.id === `page-${pageId}`);
+      });
+      navButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.page === pageId);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showWorkTab(tabId) {
+      activeWorkTab = tabId;
+      workTabs.forEach((tab) => {
+        tab.classList.toggle('active', tab.dataset.workTab === tabId);
+      });
+      workPanels.forEach((panel) => {
+        panel.classList.toggle('active', panel.id === `work-${tabId}`);
+      });
+    }
+
+    navButtons.forEach((btn) => {
+      btn.addEventListener('click', () => showPage(btn.dataset.page));
+    });
+
+    jumpButtons.forEach((btn) => {
+      btn.addEventListener('click', () => showPage(btn.dataset.pageJump));
+    });
+
+    workTabs.forEach((tab) => {
+      tab.addEventListener('click', () => showWorkTab(tab.dataset.workTab));
+    });
+
+    if (workSamplesLink) {
+      workSamplesLink.addEventListener('click', () => {
+        showPage('work');
+        showWorkTab('bias');
+      });
+    }
+
+    // Hero typing
+    const heroWords = ['content creator', 'marketer', 'student', 'storyteller'];
+    const heroTarget = document.getElementById('hero-typing');
+    let heroWordIndex = 0;
+    let heroCharIndex = 0;
+
+    function typeHeroWord() {
+      const currentWord = heroWords[heroWordIndex];
+      if (heroCharIndex < currentWord.length) {
+        heroCharIndex += 1;
+        heroTarget.textContent = currentWord.slice(0, heroCharIndex);
+        setTimeout(typeHeroWord, 50);
+      } else {
+        setTimeout(() => {
+          heroCharIndex = 0;
+          heroWordIndex = (heroWordIndex + 1) % heroWords.length;
+          heroTarget.textContent = '';
+          typeHeroWord();
+        }, 2000);
+      }
+    }
+    typeHeroWord();
+
+    // Quote typing with styling
+    const quoteTarget = document.getElementById('quote-typing');
+    const quoteSegments = [
+      { text: 'One ', className: '' },
+      { text: 'day', className: 'italic' },
+      { text: ' or ', className: '' },
+      { text: 'day ', className: '' },
+      { text: 'one', className: 'italic', color: 'var(--accent)' },
+      { text: '.', className: '' },
+    ];
+    const flatQuote = quoteSegments.map(s => s.text).join('');
+    let quoteIndex = 0;
+
+    function renderQuote() {
+      quoteTarget.innerHTML = '';
+      let consumed = 0;
+      quoteSegments.forEach((segment) => {
+        const start = consumed;
+        const end = consumed + segment.text.length;
+        consumed = end;
+
+        if (quoteIndex <= start) return;
+
+        const visibleText = segment.text.slice(0, Math.min(quoteIndex - start, segment.text.length));
+        const span = document.createElement('span');
+        span.textContent = visibleText;
+        if (segment.className) span.className = segment.className;
+        if (segment.color) span.style.color = segment.color;
+        quoteTarget.appendChild(span);
+      });
+    }
+
+    function typeQuote() {
+      if (quoteIndex < flatQuote.length) {
+        quoteIndex += 1;
+        renderQuote();
+        setTimeout(typeQuote, 40);
+      } else {
+        setTimeout(() => {
+          quoteIndex = 0;
+          renderQuote();
+          typeQuote();
+        }, 2000);
+      }
+    }
+    renderQuote();
+    typeQuote();
+  </script>
+</body>
+</html>
